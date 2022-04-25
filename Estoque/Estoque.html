@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criacão de Estoque</title>
+    <style>
+        .cor {
+            color: rgb(204, 67, 4)
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="cor">
+        <center>Criar Estoque</center>
+    </h1>
+    <h2>
+        <form>
+           <div><input id="nome" placeholder="Nome" /></div> 
+            <input id="rua" placeholder="Rua" />
+            <input id="bairro" placeholder="Bairro">
+            <input id="numero" placeholder="Numero"/> <button id="btn-criarEstoque">Criar Estoque</button>
+        </form>
+    </h2>
+    <ul id="lista-estoques"></ul>
+
+    <input id="remover"> <button id="btn-remover">Remover Estoque</button>
+
+    <h3>
+        <style>
+            .cor1 {
+                color: rgb(204, 67, 4)
+            }
+        </style>
+
+        <select id="select-estoque">
+            <option id="option-estoque"></option>
+        </select>
+        
+        <h1 class="cor1">
+            <center> Criação de depósito</center>
+        </h1>
+        <h2>
+
+            Nome: <input id="nome-item" /> Quantidade: <input id="quantidade-item" /> <button id="btn-criarItem">Criar
+                item</button>
+            <p></p>
+            <ul id="lista-itens"></ul>
+
+            <p><label for="estoque">Selecione o Estoque:</label>
+                <select id="select">
+                    <option id="option"></option>
+                </select>
+
+                </input> <button nome="btn-removerEstoque">Criar depósito nesse Estoque</button>
+        </h2>
+    </h3>
+
+
+
+
+
+
+    <script>
+        class ItemEstoque {
+            constructor(descricao, unidadeMedida, preco) {
+                this.descricao = descricao
+                this.unidadeMedida = unidadeMedida
+                this.preco = preco
+            }
+        }
+
+        class Deposito {
+
+            itens = []
+
+            constructor(nome, quantidadeMinima) {
+                this.nome = nome
+                this.quantidadeMinima = quantidadeMinima
+            }
+
+            adicionarItem(item, quantidade) {
+                if (quantidade < 0) throw Error('Quantidade não pode ser negativa')
+                const itemEstoque = this.itens.find(itemEst => itemEst.item === item)
+                if (itemEstoque) {
+                    itemEstoque.quantidade += quantidade
+
+                    return item
+                }
+                this.itens.push({
+                    item,
+                    quantidade
+                })
+
+                return item
+            }
+
+            removerItem(item, quantidade) {
+                if (quantidade < 0) throw Error('Quantidade Removida tem que ser maior que 0')
+                const itemEstoque = this.itens.find(itemEst => itemEst.item === item)
+                if (itemEstoque) {
+                    itemEstoque.quantidade -= quantidade
+                    return item
+                }
+
+            }
+
+            getValorTotal() {
+                return this.itens.reduce((ac, itemEst) => ac + (itemEst.quantidade * itemEst.item.preco), 0)
+
+            }
+
+            quantidadeTotalItem(item) {
+                const itemEstoque = this.itens.find(itemEst => itemEst.item === item)
+                if (itemEstoque) {
+                    return itemEstoque.quantidade
+                }
+                return 0
+            }
+
+            reposicaoItem(item) {
+                return this.itens.filter(item => {
+                    if (item.quantidade <= 10) return item.item
+                })
+            }
+        }
+
+
+        class Estoque {
+            depositos = []
+
+            constructor(nome, rua, bairro, numero) {
+                this.nome = nome
+                this.rua = rua
+                this.bairro = bairro
+                this.numero = numero
+            }
+
+            criarDeposito(nome, quantidadeMinima) {
+                const novoDeposito = new Deposito(nome, quantidadeMinima)
+                this.depositos.push(novoDeposito)
+                return novoDeposito
+            }
+
+            removerDeposito(deposito) {
+                // const indice = this.depositos.indexOf(deposito)
+                // if (indice !== -1) // So remove o item se o deposito for encontrado
+                //     this.depositos.splice(indice, 1)
+                // return this.depositos
+
+                this.depositos = this.depositos.filter(depositoEst => depositoEst !== deposito)
+                return this.depositos
+            }
+
+            getValorTotal() {
+                return this.depositos.reduce((ac, depositoEst) => ac + depositoEst.getValorTotal(), 0)
+            }
+            quantidadeTotalDeposito(item) {
+                return this.depositos.reduce((ac, depositoEst) => ac + depositoEst.quantidadeTotalItem(item), 0)
+            }
+            //  Estoque [deposito, deposito...] -> deposito -> itens
+            quantidadeTotalporDeposito(item) {
+                return this.depositos.map(depositoEst => {
+                    return {
+                        deposito: depositoEst.nome,
+                        item: item.descricao,
+                        unidadeMedida: item.unidadeMedida,
+                        quantidade: depositoEst.quantidadeTotalItem(item)
+                    }
+                })
+            }
+        }
+
+        let tabelaDeposito = []
+        let tabelaEstoque = []
+
+        const btnCriarEstoque = document.getElementById('btn-criarEstoque')
+        const nome = document.getElementById('nome')
+        const rua = document.getElementById('rua')
+        const bairro = document.getElementById('bairro')
+        const numero = document.getElementById('numero')
+
+        bairro.addEventListener('keypress', e => {
+            if (e.keyCode !== 13) return
+            if (!bairro.value) return
+
+            btnCriarEstoque.click()
+        })
+
+        numero.addEventListener('keypress', e => {
+            if (e.keyCode !== 13) return
+            if (!numero.value) return
+
+            btnCriarEstoque.click()
+        })
+
+
+        nome.addEventListener('keypress', e => {
+            if (e.keyCode !== 13) return
+            if (!nome.value) return
+
+            btnCriarEstoque.click()
+        })
+
+        rua.addEventListener('keypress', e => {
+            if (e.keyCode !== 13) return
+            if (!rua.value) return
+
+            btnCriarEstoque.click()
+        })
+
+        btnCriarEstoque.addEventListener('click', () => {
+            if (nome.value.trim() === '' || rua.value.trim() === '' || bairro.value.trim() === '' || numero
+                .value.trim() === '') {
+                return
+            }
+            const estoque = new Estoque(nome.value, rua.value, bairro.value, numero.value)
+            tabelaEstoque.push(estoque)
+            nome.value = ''
+            rua.value = ''
+            bairro.value = ''
+            numero.value = ''
+
+            const listaEstoques = document.getElementById('lista-estoques')
+            const estoqueItemLista = document.createElement('li')
+            estoqueItemLista.appendChild(document.createTextNode(estoque.nome + ' ' + estoque.rua + ' ' +
+                estoque.bairro + ' ' + estoque.numero))
+            listaEstoques.appendChild(estoqueItemLista)
+
+
+            const select = document.getElementById('select')
+            const option = document.createElement('option')
+            for (let selecao of tabelaEstoque) {
+                option.text = selecao.nome + ' ' + selecao.rua + ' ' + selecao.bairro + ' ' + selecao.numero
+            }
+            select.appendChild(option)
+
+            const selectEst = document.getElementById('select-estoque')
+            const optionEst = document.createElement('option-estoque')
+            for (let selecaoEst of tabelaEstoque) {
+                optionEst.text = selecaoEst.nome + ' ' + selecaoEst.rua + ' ' + selecaoEst.bairro + ' ' + selecaoEst.numero
+
+            }
+            selectEst.appendChild(optionEst)
+
+
+        })
+        const btnRemover = document.getElementById('btn-remover')
+        const inputRemover = document.getElementById('remover')
+
+        inputRemover.addEventListener('keypress', e => {
+            if (e.keyCode !== 13) return // se a tecla enter não for pressionada nao faz nada
+            if (!inputRemover.value) return // se o inpute for diferente de uma string nao faz nada
+
+            btnRemover.click()
+        })
+
+        btnRemover.addEventListener('click', () => {
+            tabelaEstoque = tabelaEstoque.filter(removeEst => removeEst.nome + ' ' + removeEst
+                .rua + ' ' + removeEst.bairro + ' ' + removeEst.numero !== inputRemover.value)
+
+            let listaEst = document.getElementById('lista-estoques')
+            let filhos = listaEst.children
+            for (const filho of filhos) {
+                if (filho.innerHTML === inputRemover.value) {
+                    listaEst.removeChild(filho)
+
+                }
+            }
+
+            let select = document.getElementById('select')
+            let options = select.children
+            for (const opcao of options) {
+                if (opcao.value === inputRemover.value) {
+                    select.removeChild(opcao)
+                }
+            }
+            inputRemover.value = ''
+        })
+        const btnCriarItem = document.getElementById('btn-criarItem')
+        const nomeItem = document.getElementById('nome-item')
+        const nomeQuantidade = document.getElementById('quantidade-item')
+
+        nomeQuantidade.addEventListener('keypress', e => {
+            if (e.keyCode !== 13) return
+            if (!nomeQuantidade.value) return
+
+            btnCriarItem.click()
+        })
+
+        nomeItem.addEventListener('keypress', e => {
+            if (e.keyCode !== 13) return
+            if (!nomeItem.value) return
+
+            btnCriarItem.click()
+        })
+
+        btnCriarItem.addEventListener('click', () => {
+            if (nomeItem.value.trim() === '' || nomeQuantidade.value.trim() === '') {
+                return
+            }
+            const item = new Deposito(nomeItem.value, nomeQuantidade.value)
+            tabelaDeposito.push(item)
+            nomeItem.value = ''
+            nomeQuantidade.value = ''
+
+
+            const listaItem = document.getElementById('lista-itens')
+            const itemListado = document.createElement('li')
+            itemListado.appendChild(document.createTextNode(item.nome + ' ' + item.quantidadeMinima))
+            listaItem.appendChild(itemListado)
+
+        })
+    </script>
+
+</body>
+
+</html>
