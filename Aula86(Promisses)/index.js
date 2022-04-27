@@ -4,7 +4,7 @@ function rand(min, max) { // função para um tempo aleatório
     return Math.floor(Math.random() * (max - min ) + min)
 }
 
-function esperaAi (msg, tempo) {
+function esperaAi (msg, tempo) { 
     return new Promise((resolve, reject) => {
         if(msg !== 'string') reject('ERROR')
     setTimeout( () => {
