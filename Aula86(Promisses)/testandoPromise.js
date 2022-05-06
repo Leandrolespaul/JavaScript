@@ -14,7 +14,7 @@ function player(email, senha) {
 function executarDepoisLogar(){
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            console.log('Executei depois de logar!')
+            console.log('Executei depois de logar! (Estava <pending>)')
         }, 2600)
     })
 }
