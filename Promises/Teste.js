@@ -2,14 +2,18 @@ class Player {
     constructor(name, life) {
         this.name = name
         this.life = life
+        
+        
     }
 
 }
+
+
 const player = new Player('Jason', 7000)
 
 const marrogar = new Player('Lord Marrowgar', 500)
 const leidy = new Player('Lady Deathwhisper', 600)
-const barco = new Player(' Gunship Battle', 600)
+const barco = new Player(' Gunship Battle', 600, )
 const db = new Player('Deathbringer Saurfang', 700)
 const fester = new Player('Festergut', 800)
 const rotface = new Player('Rotface', 800)
