@@ -1,11 +1,15 @@
-const tabuleiro = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+const TABULEIRO_MODELO = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
-const guardado = tabuleiro
+let tabuleiro = [...TABULEIRO_MODELO]
 
 const jogador1 = "X"
 const jogador2 = "O"
 
-let vezJogador = jogador1
+let jogadores = [jogador1, jogador2]
+
+let vezJogador = rand(jogadores)
+
+console.log('Vez do Jogador: ', vezJogador)
 
 
 function jogar(casa) {
@@ -18,6 +22,8 @@ function jogar(casa) {
     tabuleiro[casa] = vezJogador
 
     vezJogador = vezJogador === jogador1 ? jogador2 : jogador1
+
+
 
 
     if (tabuleiro[0] === jogador1 && tabuleiro[1] === jogador1 && tabuleiro[2] === jogador1) return console.log('Jogador 1 ganhou! Parabéns!!!')
@@ -50,14 +56,26 @@ function jogar(casa) {
     // console.log(tabuleiro)
 
 
-    if (tabuleiro.every(valor => typeof valor === 'string')) console.log('Velha!')
+    if (tabuleiro.every(valor => typeof valor === 'string')) {
+        console.log('Velha!')
+        resetGame()
+    }
 
     console.log(tabuleiro)
 
-
-
-
 }
+
+function resetGame() {
+    tabuleiro = [...TABULEIRO_MODELO]
+}
+
+function rand(jogadores) {
+    return jogadores[(Math.random() * jogadores.length) | 0]
+}
+
+
+
+
 
 
 
