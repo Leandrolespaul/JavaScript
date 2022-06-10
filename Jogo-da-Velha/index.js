@@ -105,6 +105,7 @@ const funcoes = {
 }
 
 
+
 // function jogadorXVenceu() {
 //     pontuacaoJogadorX++
 //     console.log('Jogador X venceu!!!', pontuacaoJogadorX)
@@ -118,6 +119,7 @@ const funcoes = {
 function jogadorVencedor(jogador) {
     funcoes['jogador' + jogador + 'Venceu']()
 }
+
 
 
 
