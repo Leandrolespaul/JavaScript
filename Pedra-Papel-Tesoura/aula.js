@@ -8,17 +8,14 @@ const pedra = {
     nome: PEDRA,
     ganhaDe: TESOURA
 }
-
 const papel = {
     nome: PAPEL,
     ganhaDe: PEDRA
 }
-
 const tesoura = {
     nome: TESOURA,
     ganhaDe: PAPEL
 }
-
 const objs = {
     PEDRA: pedra,
     PAPEL: papel,
@@ -37,4 +34,4 @@ function jogar(opcaoP1, opcaoP2) {
     return console.log('p2')
 }
 
-jogar('pedra', 'tesoura')
+jogar(PEDRA, PAPEL)
