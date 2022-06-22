@@ -1,4 +1,4 @@
-let palavra = 'Beterraba'.toUpperCase()
+let palavra = 'Beterrába'.toUpperCase()
 let palavraUsuario = palavra.split('').fill('_')
 const letrasUsadas = []
 let erros = 0
@@ -43,22 +43,4 @@ function jogar(letra) {
 jogar('a')
 
 
-
-
-
-
 console.log(letras)
-
-
-
-
-
-
-
-
-
-
-
-
-
-// console.log(letras)

@@ -10,7 +10,8 @@
 
 <body>
     <script>
-        let palavra = 'Beterraba'.toUpperCase()
+        let palavraInicial = 'Beterrába'.toUpperCase()
+        let palavra = palavraInicial.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
         let palavraUsuario = palavra.split('').fill('_')
         const letrasUsadas = []
         let erros = 0
@@ -48,9 +49,8 @@
                 const indice = i
 
                 if (letra === palavra[i]) {
-                    palavraUsuario[i] = letra
+                    palavraUsuario[i] = palavraInicial[i]
                 }
-
                 console.log(letras, indice)
 
             }
@@ -60,11 +60,15 @@
 
             if (!palavraUsuario.some(valor => valor === '_')) { // se a palavra não estiver nenhum valor '_'...
 
+                console.log(palavraInicial)
+
                 palavraUsuario = palavra.split('').fill('_')
                 letrasUsadas.length = 0
                 erros = 0
 
-                return console.log('Jogador Ganhou!')
+
+                return console.log('Jogador Ganhou!', `A palavra é: ${palavraInicial}`)
+
 
             }
 
