@@ -10,15 +10,31 @@
 
 <body>
     <script>
-        let palavraInicial = 'Beterrába'.toUpperCase()
-        let palavra = palavraInicial.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
-        let palavraUsuario = palavra.split('').fill('_')
+        let palavraInicial
+        let palavra
+        let palavraUsuario
         const letrasUsadas = []
-        let erros = 0
+        let erros
         const MAX_ERROS = 7
 
+        function iniciarNovoJogo() {
 
+            console.log('Buscando palavra:')
 
+            fetch('https://api.dicionario-aberto.net/random')
+                .then(res => res.json())
+                .then(res => {
+                    palavraInicial = res.word.toUpperCase()
+                    palavra = palavraInicial.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '')
+                    palavraUsuario = palavra.split('').fill('_')
+                    letrasUsadas.length = 0
+                    erros = 0
+                    console.log('Palavra selecionada, informe uma letra: ')
+                })
+
+        }
+
+        iniciarNovoJogo()
 
         function jogar(letra) {
             if (typeof letra !== 'string') return console.log('Caractere inválido.') // se for diferente de STRING 
@@ -45,35 +61,25 @@
             // B E T E R R A B A
 
             for (let i = 0; i < palavra.length; i++) {
-                const letras = palavra[i]
-                const indice = i
 
                 if (letra === palavra[i]) {
                     palavraUsuario[i] = palavraInicial[i]
                 }
-                console.log(letras, indice)
 
             }
-
-
             console.log(palavraUsuario)
 
             if (!palavraUsuario.some(valor => valor === '_')) { // se a palavra não estiver nenhum valor '_'...
-
-                console.log(palavraInicial)
 
                 palavraUsuario = palavra.split('').fill('_')
                 letrasUsadas.length = 0
                 erros = 0
 
-
                 return console.log('Jogador Ganhou!', `A palavra é: ${palavraInicial}`)
 
 
+
             }
-
-
-
 
         }
     </script>
