@@ -1,0 +1,116 @@
+// function soma(...array) {
+//     let somaInicial = 0
+//     for (let i = 0; i < array.length; i++) {
+//         somaInicial += array[i];
+//     }
+//     return somaInicial
+// }
+// console.log(soma(1, 2, 3, 4))
+
+// function soma(num1, num2) {
+//     return num1 + num2
+// }
+// console.log(soma(1, 2))
+
+
+// function somar(array) {
+//     let somaInicial = 0
+//     for (let i = 0; i < array.length; i++) {
+//         somaInicial += array[i];
+//     }
+//     return somaInicial
+// }
+// console.log(somar([1, 2, 3, 4]))
+
+// function numPar(array) {
+//     const pares = [] // Novo Array de numeros pares
+//     for (let i = 0; i < array.length; i++) {
+//         if (array[i] % 2 == 0) // Aqui o calculo com resto 0 se for par
+//             pares.push(array[i]) // dei um push aqui para o novo array
+
+//     }
+//     return pares
+// }
+// console.log(numPar([10, 20, 11, 14, 23, 61]))
+
+// function soma(array) {
+//     let valorInicialSoma = 0
+//     for (let i = 0; i < array.length; i++) {
+//         valorInicialSoma += array[i]
+//     }
+//     return valorInicialSoma
+
+// }
+
+// console.log(soma([1, 2, 3, 4]))
+// ___________________________________________________________________________________________________________________
+
+// 1- cria uma função q printa a tabuada de 0 a 9
+// Como opcional, essa função pode receber um parâmetro 
+// q pode ser um número de 0 a 9 e vc printa a tabuada do número recebido como parametro
+
+// function tabuada(numero) {
+//     if (numero > 9 || numero < 0) return console.log('Somente numeros de 0 a 9')
+//     if (typeof numero !== 'number') return console.log('Aceita somente números.')
+
+//     let resultado
+//     for (let i = 0; i < 10; i++) {
+//         resultado = numero * i
+//         console.log(`${numero} x ${i} = ${resultado}`)
+//     }
+
+// }
+// tabuada(8)
+// ____________________________________________________________________________________________________________
+
+
+// 2- cria uma função que recebe um array e reverte. Ex: [1,2,3] converte para [3,2,1]
+// Nao pode usar o método reverse do array
+
+// function arrayReverse(array) {
+//     let arrayInverso = []
+//     for (let i = array.length - 1; i >= 0; i--) { // i = tamanho do array - 1,  i tem q que ser maior ou = 0, contator decrescente (i--)
+//         const el = array[i];
+//         arrayInverso.push(el)
+//     }
+//     return console.log(arrayInverso)
+// }
+// arrayReverse([12, 23, 35])
+// ___________________________________________________________________________________________________________
+
+// 3- cria uma função q retorna o número de vogais de uma string
+
+
+// function numerosEVogais(string) {
+//     if (typeof string !== 'string') return console.log('Somente letras.')
+//     const vogais = 'aAáàeEéèiíìIoOóòuUúùÁÉÍÓÚÀÈÌÒÙ'
+//     let contator = 0
+//     for (let i = 0; i < string.length; i++) {
+//         if (vogais.indexOf(string[i]) !== -1) { // essa aprendi no jogo da forca kkkk indexOf usado para achar um valor dentro de uma string
+
+//             contator += 1; // contador para contar o numero de vogais
+//         }
+//     }
+//     return contator
+// }
+
+// // console.log(numerosEVogais('Philipe') + ' vogais')
+
+// _________________________________________________________________________________________________________________
+
+// 3. Crie uma função de conversão de comprimento
+// Criar uma função é uma habilidade que será útil em muitas configurações e, à medida que você progride, estará
+//  trabalhando em funções muito mais complicadas do que esta. Mas uma função que converte unidades de medida pode 
+//  ser bastante útil em várias profissões e indústrias.
+// Vamos começar com uma conversão de quilômetros para milhas. A função deve incluir a entrada em quilômetros e retornar a resposta em milhas.
+
+// function converter(quilometros) {
+//     if (typeof quilometros !== 'number') return console.log('Somente numeros')
+//     let milhas
+//     milhas = quilometros / 1.609 // padrao calculo, converter quilometros em milhas.
+//     return `${milhas.toFixed(3)} milhas.`
+// }
+
+// console.log(converter(10))
+
+// _________________________________________________________________________________________________________________

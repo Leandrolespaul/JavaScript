@@ -1,6 +1,3 @@
-
-
-
 /*const raiz = n => n ** 0.5  //arrow =>
 
 console.log(raiz(9));
@@ -46,7 +43,7 @@ const variavel = saudacao('Luiz');
 console.log(variavel);
 */
 
-function nomeDaFuncao (parametro) {
+function nomeDaFuncao(parametro) {
     console.log(parametro, 'Olá');
 }
-nomeDaFuncao();
+nomeDaFuncao('Oi');
