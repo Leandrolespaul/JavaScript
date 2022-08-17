@@ -30,8 +30,8 @@ function jogar(opcaoP1, opcaoP2) {
     if (!jogadasValidas.includes(opcaoP2)) return console.log('Jogada Inválida.')
     if (opcaoP1 === opcaoP2) return console.log('Empate.')
 
-    if (objs[opcaoP1].ganhaDe === opcaoP2) return console.log('p1')
-    return console.log('p2')
+    if (objs[opcaoP1].ganhaDe === opcaoP2) return console.log('Player 1 é o Ganhador!')
+    return console.log('Player 2 é o Ganhador!')
 }
 
-jogar(PEDRA, PAPEL)
+jogar(TESOURA, PAPEL)

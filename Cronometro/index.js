@@ -7,9 +7,11 @@ function zeroEsquerda(numero) {
 let horas = 0
 let minutos = 0
 let segundos = 0
-let milessimos = 0
+let milesimos = 0
 let timer
 let cronometroJaStartado = false
+
+
 
 const start = () => {
 
@@ -17,9 +19,9 @@ const start = () => {
     cronometroJaStartado = true
 
     timer = setInterval(() => {
-        if ((milessimos += 10) === 1000) {
+        if ((milesimos += 10) === 1000) {
             segundos++
-            milessimos = 0
+            milesimos = 0
         }
         if (segundos === 60) {
             minutos++
@@ -32,13 +34,18 @@ const start = () => {
         if (horas === 24) {
             horas = 0
         }
-        const cronometro = document.getElementById('cronometro')
-        cronometro.innerText = `${zeroEsquerda(horas)} : ${zeroEsquerda(minutos)} : ${zeroEsquerda(segundos)} : ${zeroEsquerda(milessimos)}`
+
+        idCronometro()
+
     }, 10)
 
 
 }
 
+const idCronometro = () => {
+    const cronometro = document.getElementById('cronometro')
+    cronometro.innerText = `${zeroEsquerda(horas)} : ${zeroEsquerda(minutos)} : ${zeroEsquerda(segundos)} : ${zeroEsquerda(milesimos)}`
+}
 
 
 
@@ -52,7 +59,18 @@ const reset = () => {
     horas = 0
     minutos = 0
     segundos = 0
-    milessimos = 0
+    milesimos = 0
     cronometroJaStartado = false
     document.getElementById('cronometro').innerHTML = '00 : 00 : 00 : 00'
 }
+
+// const btnStart = document.getElementById('btn-start')
+// const pressionaEspaco = () => {
+//     btnStart.addEventListener('keypress', (e) => {
+//         if (e.keyCode === 32) {
+//             start()
+//             cronometroJaStartado = true
+//         }
+//     })
+
+// }

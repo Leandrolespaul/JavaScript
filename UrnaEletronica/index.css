@@ -1,0 +1,58 @@
+.justicaEleitoral-text {
+    text-align: center
+}
+
+.img-justicaEleitoral {
+    max-width: 80px;
+    max-height: 80px;
+    width: auto;
+    height: auto;
+}
+
+
+
+
+.btnNum {
+    margin-top: 6px;
+    border-color: rgb(48, 47, 47);
+    color: white;
+    background-color: black;
+    width: 50px;
+    height: 50px;
+}
+
+.btnBranco {
+    border-color: white;
+    margin: 10px;
+    color: black;
+    background-color: white;
+    width: 70px;
+    height: 50px;
+    font-size: 13px;
+}
+
+.btnCorrigir {
+    border-color: white;
+    margin: 10px;
+    color: black;
+    background-color: orangered;
+    width: 70px;
+    height: 50px;
+    font-size: 13px;
+}
+
+.btnConfirmar {
+    border-color: white;
+    margin: 10px;
+    color: black;
+    background-color: green;
+    width: 100px;
+    height: 70px;
+    font-size: 15px;
+}
+
+.corpo {
+    background-color: rgb(29, 26, 26);
+    margin-left: 700px;
+    display: grid
+}
