@@ -23,6 +23,13 @@ let totalGeralVotos = 0
 let votosNulos = 0
 let votosBrancos = 0
 
+function reset() {
+    candidatoDiv.innerHTML = ''
+    numeroDiv.innerHTML = ''
+    partidoDiv.innerHTML = ''
+    displayNumeros = ''
+}
+
 function confirmar(numeroDoCandidato) {
 
     numeroDoCandidato = parseInt(displayNumeros)
@@ -36,27 +43,17 @@ function confirmar(numeroDoCandidato) {
     console.log('Votos Nulos', votosNulos)
     console.log('Votos brancos', votosBrancos)
 
-    candidatoDiv.innerHTML = ''
-    numeroDiv.innerHTML = ''
-    partidoDiv.innerHTML = ''
-    displayNumeros = ''
-
+    reset()
 }
 
 function branco() {
     votosBrancos++
-    candidatoDiv.innerHTML = ''
-    numeroDiv.innerHTML = ''
-    partidoDiv.innerHTML = ''
-    alert('Seu voto foi em branco.')
-
+    alert('Seu voto foi em Branco.')
+    reset()
 }
 
 function corrigir() {
-    candidatoDiv.innerHTML = ''
-    numeroDiv.innerHTML = ''
-    partidoDiv.innerHTML = ''
-    displayNumeros = ''
+    reset()
 }
 
 
@@ -79,7 +76,6 @@ for (let el of elements) { // fazendo um for para passar por cada button
                 numeroDiv.innerHTML = `Numero do candidato: ${candidato.numero}`
                 partidoDiv.innerHTML = `Partido do candidato: ${candidato.partido}`
             }
-
         });
     })
 
