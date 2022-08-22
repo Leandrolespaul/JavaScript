@@ -35,9 +35,14 @@ function confirmar(numeroDoCandidato) {
     numeroDoCandidato = parseInt(displayNumeros)
     const candidato = candidatos.find(candidato => candidato.numero === numeroDoCandidato)
 
-    if (!candidato) return votosNulos++
+    if (!candidato) {
+        reset()
+        return votosNulos++
+    }
+
     candidato.numeroVotos++
     totalGeralVotos++
+
 
     console.log(candidato.nome, candidato.numero, candidato.partido, candidato.numeroVotos)
     console.log('Votos Nulos', votosNulos)
