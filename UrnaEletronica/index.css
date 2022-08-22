@@ -53,6 +53,19 @@
 
 .corpo {
     background-color: rgb(29, 26, 26);
-    margin-left: 700px;
-    display: grid
+    margin-left: 500px;
 }
+
+.display {
+    margin-right: 500px;
+
+}
+
+.divMae {
+    display: inline-block;
+}
+
+/* 
+div {
+    display: inline-block;
+} */
