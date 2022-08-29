@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <!--<button class="btn" value="1">1</button>-->
+    <!--<button class="btn" value="2">2</button>-->
+    <!--<button class="btn" value="3">3</button>-->
+
+    <script>
+        const candidatosDepFederal = [{
+                nome: 'FDP',
+                numero: 1234,
+                foto: '',
+                partido: 'PT',
+                numVotos: 0
+            },
+            {
+                nome: 'Maldito',
+                numero: 4321,
+                foto: '',
+                partido: 'PMDB',
+                numVotos: 0
+            },
+        ]
+
+        const candidatosDepEstadual = [{
+                nome: 'FDP Estadual',
+                numero: 12345,
+                foto: '',
+                partido: 'PT',
+                numVotos: 0
+            },
+            {
+                nome: 'Maldito Estadual',
+                numero: 54321,
+                foto: '',
+                partido: 'PMDB',
+                numVotos: 0
+            }
+        ]
+
+        const candidatosSenador = [{
+                nome: 'Senador FDP',
+                numero: 123,
+                foto: '',
+                partido: 'PT',
+                numVotos: 0
+            },
+            {
+                nome: 'Senador Maldito',
+                numero: 321,
+                foto: '',
+                partido: 'PMDB',
+                numVotos: 0
+            }
+        ]
+
+        const candidatosGovernador = [{
+                nome: 'Governador FDP',
+                numero: 12,
+                foto: '',
+                partido: 'PT',
+                numVotos: 0
+            },
+            {
+                nome: 'Governador Maldito',
+                numero: 21,
+                foto: '',
+                partido: 'PMDB',
+                numVotos: 0
+            }
+        ]
+
+        const candidatosPresidente = [{
+                nome: 'Lula',
+                numero: 13,
+                foto: '',
+                partido: 'PT',
+                numVotos: 0
+            },
+            {
+                nome: 'Bolsonaro',
+                numero: 22,
+                foto: '',
+                partido: 'PSL',
+                numVotos: 0
+            }
+        ]
+
+        const cargos = [{ // cargos ja em ordem para a votação
+                nome: 'Deputado Federal',
+                numDigitos: 4,
+                candidatos: candidatosDepFederal
+            },
+            {
+                nome: 'Deputado Estadual',
+                numDigitos: 5,
+                candidatos: candidatosDepEstadual
+            },
+            {
+                nome: 'Senador',
+                numDigitos: 3,
+                candidatos: candidatosSenador
+            },
+            {
+                nome: 'Governador',
+                numDigitos: 2,
+                candidatos: candidatosGovernador
+            },
+            {
+                nome: 'Presidente',
+                numDigitos: 2,
+                candidatos: candidatosPresidente
+            },
+        ]
+
+        const displayUrna = {
+            numeroDigitado: '',
+            fotoCandidato: '',
+            partidoCandidato: '',
+            cargoQueEstaSendoVotadoAgora: cargos[0]
+        }
+
+
+        const digitarNumero = (num) => {
+            if (displayUrna.numeroDigitado.length === displayUrna.cargoQueEstaSendoVotadoAgora.numDigitos) return
+            displayUrna.numeroDigitado += num
+
+        }
+
+        const confirmarVotacao = () => {
+            const candidato = displayUrna.cargoQueEstaSendoVotadoAgora.candidatos.find(candidato => candidato
+                .numero == displayUrna.numeroDigitado)
+            candidato.numVotos++
+            displayUrna.numeroDigitado = ''
+            displayUrna.partidoCandidato = ''
+            displayUrna.fotoCandidato = ''
+            proximoCargo()
+        }
+
+        const proximoCargo = () => {
+            const indexCargoAtual = cargos.indexOf(displayUrna.cargoQueEstaSendoVotadoAgora)
+            if (indexCargoAtual === cargos.length - 1) return
+            displayUrna.cargoQueEstaSendoVotadoAgora = cargos[indexCargoAtual + 1]
+        }
+    </script>
+</body>
+
+</html>
