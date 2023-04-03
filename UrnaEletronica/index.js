@@ -143,10 +143,6 @@ function voto() {
 voto()
 
 
-
-
-
-
 candidatosPresidente.forEach(candidato => {
     if (candidato.numero === parseInt(displayNumeros)) {
         candidatoDiv.innerHTML = `Candidato à Presidência: ${candidato.nome}`
