@@ -2,23 +2,18 @@ let id = 1;
 const idAutomatico = () => id++;
 
 const adicional = [
-  { queijoEmpanado: "Queijo Empanado", preco: 8.0 },
-  { carne: "Carne-Blend 80g", preco: 6.0 },
-  { carne: "Carne-Blend 150g", preco: 8.0 },
-  { carneFrango: "Carne-Frango-Blend 150", preco: 8.0 },
+  { id: idAutomatico(), item: "Queijo Empanado", preco: 8.0 },
+  { id: idAutomatico(), item: "Carne-Blend 80g", preco: 6.0 },
+  { id: idAutomatico(), item: "Carne-Blend 150g", preco: 8.0 },
+  { id: idAutomatico(), item: "Carne-Frango-Blend 150", preco: 8.0 },
 ];
 
 const hamburguers = [
   {
     id: idAutomatico(),
     hamburguer: "Chumi-Burguer",
-    ingredientes: [
-      "Pão-Brioche",
-      "Carne-Linguiça 80g",
-      "Queijo Cheedar",
-      "Bacon",
-      "Cebola Roxa",
-    ],
+    ingredientes: "hsbhgbshgbsghjb, kjskjskjs, jksjkskjs, jiksjikskjs",
+    adicionais: [],
     quantidade: 0,
     preco: 25.9,
   },
