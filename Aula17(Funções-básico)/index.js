@@ -35,7 +35,6 @@ console.log(soma(5, 10));
 
 
 
-
 /*function saudacao(nome){
 return `Bom dia ${nome} !`;
 }
@@ -46,4 +45,4 @@ console.log(variavel);
 function nomeDaFuncao(parametro) {
     console.log(parametro, 'Olá');
 }
-nomeDaFuncao('Oi');
+nomeDaFuncao('Oi')

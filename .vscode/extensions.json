@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "hoovercj.vscode-power-mode",
-        "dracula-theme.theme-dracula"
+        "dracula-theme.theme-dracula",
+        "glassuidark.glass-ui-dark"
     ]
 }

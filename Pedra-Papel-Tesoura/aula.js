@@ -15,6 +15,7 @@ const papel = {
 const tesoura = {
     nome: TESOURA,
     ganhaDe: PAPEL
+                                                                        
 }
 const objs = {
     PEDRA: pedra,
