@@ -1,51 +1,52 @@
 let id = 1;
 const idAutomatico = () => id++;
+let idAdd = 1;
+const idAddAutomatico = () => idAdd++;
 
 const adicional = [
-  { id: idAutomatico(), item: "Queijo Empanado", preco: 8.0 },
-  { id: idAutomatico(), item: "Carne-Blend 80g", preco: 6.0 },
-  { id: idAutomatico(), item: "Carne-Blend 150g", preco: 8.0 },
-  { id: idAutomatico(), item: "Carne-Frango-Blend 150", preco: 8.0 },
+  { item: "Queijo-Empanado", quantidade: 0, preco: 8.0 },
+  { item: "Carne-Blend 80g", quantidade: 0, preco: 6.0 },
+  { item: "Carne-Blend 150g", quantidade: 0, preco: 8.0 },
+  { item: "Carne-Frango-Blend 150", quantidade: 0, preco: 8.0 },
 ];
 
 const hamburguers = [
   {
     id: idAutomatico(),
     hamburguer: "Chumi-Burguer",
-    ingredientes: "hsbhgbshgbsghjb, kjskjskjs, jksjkskjs, jiksjikskjs",
-    adicionais: [],
+    ingredientes:
+      "Pão-Brioche, Carne-blend-Linguiça 150g, Bacon, Queijo-Cheedar",
+    adicionais: "",
+    remocao: "",
     quantidade: 0,
     preco: 25.9,
   },
   {
     id: idAutomatico(),
     hamburguer: "Mega-Burguer",
-    ingredientes: [
-      "Pão-Gergelim",
-      "Carne-Blend 150g",
-      "Carne-Blend 150g",
-      "Queijo Mussarela",
-      "Cebola Cryspy",
-    ],
+    ingredientes:
+      "Pão-Brioche, Carne-blend 150g, Carne-blend 150g, Bacon, Queijo-Mussarela",
+    adicionais: "",
+    remocao: "",
     quantidade: 0,
     preco: 32.9,
   },
   {
     id: idAutomatico(),
     hamburguer: "Cream-Burguer",
-    ingredientes: {},
+    ingredientes:
+      "Pão-Brioche, Carne-blend 150g, Bacon, Queijo-Cheedar, Cream-Cheese",
+    adicionais: "",
+    remocao: "",
     quantidade: 0,
     preco: 26.9,
   },
   {
     id: idAutomatico(),
     hamburguer: "Bacon-Burguer",
-    ingredientes: {
-      pao: "Pão-Brioche",
-      bacon: "Bacon",
-      queijo: "Queijo-Mussarela",
-      salada: "Alface-Tomate",
-    },
+    ingredientes: "Pão-Gergelim, Carne-blend 150g, Bacon, Queijo-Mussarela",
+    adicionais: "",
+    remocao: "",
     quantidade: 0,
     preco: 19.9,
   },
@@ -53,13 +54,19 @@ const hamburguers = [
 
 const pedidoCliente = [];
 
-const formaPagamento = {
-  pagamentoDebito: "DEBITO",
-  pagamentoCredito: "CREDITO",
-  pagamentoPIX: "PIX",
+const metodoPagamento = {
+  DEBITO: "DEBITO",
+  CREDITO: "CREDITO",
+  PIX: "PIX",
 };
 
-const adicionarPedidoCliente = (hamburguer, quantidade) => {
+const adicionarPedidoCliente = (
+  hamburguer,
+  quantidade,
+  addItem,
+  quantidadeItem,
+  formaDePagamento
+) => {
   const encontrarHamburguer = hamburguers.find(
     (pedido) => pedido.hamburguer === hamburguer
   );
@@ -72,7 +79,26 @@ const adicionarPedidoCliente = (hamburguer, quantidade) => {
   } else {
     console.log("Hamburguer não encontrado!");
   }
+  let precoItem = 0;
+  if (addItem) {
+    const buscar = adicional.find((ingre) => ingre.item === addItem);
+    if (buscar) {
+      buscar.quantidade = quantidadeItem;
+      if (quantidadeItem) {
+        buscar.preco = quantidadeItem * buscar.preco;
+        precoItem = buscar.preco;
+      }
+      encontrarHamburguer.adicionais = buscar;
+    }
+  }
+  if (
+    formaDePagamento === metodoPagamento.DEBITO ||
+    formaDePagamento === metodoPagamento.PIX
+  ) {
+    const calculo = encontrarHamburguer.preco * encontrarHamburguer.quantidade;
+    const total = calculo + precoItem;
+    console.log(total);
+  }
 };
 
-adicionarPedidoCliente("Chumi-Burguer", 2, "Carne-Blend 80g");
-console.log(pedidoCliente);
+adicionarPedidoCliente("Bacon-Burguer", 2, "Queijo-Empanado", 4, "PIX");
