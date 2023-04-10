@@ -210,6 +210,6 @@ adicionarProduto("Monitor 24p", "Samsung", 1, 10);
 adicionarProduto("Microfone", "Shure M58", 2, 10);
 alterarQuantidade(2, 5);
 alterarQuantidade(5, 6);
-pedidoTotal(metodoPagamento.CREDITO, 7, "KG23");
+pedidoTotal(metodoPagamento.CREDITO, 7, "Kw23");
 console.log("_____________________________");
 console.log("Obrigado(a) pela preferência, volte sempre!");
