@@ -63,22 +63,35 @@ const adicionarItemPedido = (idItem, qtd, adicionaisPedido) => {
 
   const adicionais = adicionaisPedido.map((adc) => {
     const item = adicionaisDisponiveis.find((add) => add.id === adc.id);
+
     return { item, qtd: adc.qtd };
   });
 
   pedido.itens.push({ item, qtd, adicionais });
+};
 
-  // const valorTotalItem = item.preco * qtd;
-  const mapeamento = pedido.itens.map((item) => {
-    const valorPedido = item.item.preco * item.qtd;
-    const mapeamentoAdicionais = adicionais.map((adicional) => {
-      console.log(adicional.item.preco * item.qtd);
-    });
+const calcularValorTotal = (pedidoCliente) => {
+  const totalItens = pedidoCliente.itens.reduce(
+    (ac, produto) =>
+      produto.item.preco * produto.qtd +
+      ac +
+      produto.adicionais.reduce(
+        (acA, adicional) => adicional.item.preco * adicional.qtd + acA,
+        0
+      ),
+    0
+  );
+  // const totalAdicionais = pedidoCliente.itens.reduce(
+  //   (ac, produto) =>
+  //     ac + // somando com todos os outros reduces
+  //     produto.adicionais.reduce(
+  //       (acA, adicional) => adicional.item.preco * adicional.qtd + acA,
+  //       0
+  //     ),
+  //   0
+  // );
 
-    console.log(valorPedido.toFixed(2));
-  });
-
-  // console.log(valorTotalItem.toFixed(2));
+  pedidoCliente.valorTotal = totalItens;
 };
 
 adicionarItemPedido(2, 3, [
@@ -87,4 +100,5 @@ adicionarItemPedido(2, 3, [
 ]);
 
 adicionarItemPedido(1, 1, [{ id: 2, qtd: 1 }]);
+calcularValorTotal(pedido);
 console.log(JSON.stringify(pedido, null, 2));
