@@ -59,6 +59,7 @@ const pedido = { itens: [], valorTotal: 0 };
 
 const adicionarItemPedido = (idItem, qtd, adicionaisPedido) => {
   const item = itens.find((item) => item.id === idItem);
+  // UMA VALIDAÇÃO
   if (!item) throw Error("Item não encontrado.");
 
   const adicionais = adicionaisPedido.map((adc) => {
@@ -66,39 +67,34 @@ const adicionarItemPedido = (idItem, qtd, adicionaisPedido) => {
 
     return { item, qtd: adc.qtd };
   });
-
+  //ENVIANDO O PEDIDO PARA A VARIAVEL "PEDIDO"
   pedido.itens.push({ item, qtd, adicionais });
 };
 
-const calcularValorTotal = (pedidoCliente) => {
-  const totalItens = pedidoCliente.itens.reduce(
+// FUNÇÃO PARA CALCULAR PEDIDO DOS ITENS E DOS ADICIONAIS
+const calcularValorTotal = (pedido) => {
+  const totalPedido = pedido.itens.reduce(
     (ac, produto) =>
       produto.item.preco * produto.qtd +
       ac +
+      // ATE AQUI CALCULO VALORES DO PEDIDO DEPOIS DO "ac" TEM O + PARA SOMAR COM O SEGUNDO REDUCE DE ADICIONAIS
       produto.adicionais.reduce(
-        (acA, adicional) => adicional.item.preco * adicional.qtd + acA,
+        (acd, adicional) => adicional.item.preco * adicional.qtd + acd,
         0
       ),
     0
   );
-  // const totalAdicionais = pedidoCliente.itens.reduce(
-  //   (ac, produto) =>
-  //     ac + // somando com todos os outros reduces
-  //     produto.adicionais.reduce(
-  //       (acA, adicional) => adicional.item.preco * adicional.qtd + acA,
-  //       0
-  //     ),
-  //   0
-  // );
-
-  pedidoCliente.valorTotal = totalItens;
+  // AQUI SOBREESCREVO OS VALORES SOMADOS PARA O "valorTotal"
+  pedido.valorTotal = totalPedido;
 };
 
+// PRIMEIRO PARAMETRO ADICIONA O ITEM DEPOIS A QUANTIDADE E NO ARRAY ADICIONA O ID DO ADICIONAL E A QUANTIDADE
 adicionarItemPedido(2, 3, [
   { id: 1, qtd: 2 },
   { id: 2, qtd: 1 },
 ]);
 
+// PRIMEIRO PARAMETRO ADICIONA O ITEM DEPOIS A QUANTIDADE E NO ARRAY ADICIONA O ID DO ADICIONAL E A QUANTIDADE
 adicionarItemPedido(1, 1, [{ id: 2, qtd: 1 }]);
 calcularValorTotal(pedido);
 console.log(JSON.stringify(pedido, null, 2));
